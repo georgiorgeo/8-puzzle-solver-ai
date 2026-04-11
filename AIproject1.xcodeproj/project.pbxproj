@@ -6,10 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXFileReference section */
+		8F34E5692F855F7E006BEFFB /* State.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = State.java; sourceTree = "<group>"; };
+		8F34E56B2F87C652006BEFFB /* Move.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Move.java; sourceTree = "<group>"; };
+		8F34E56C2F87C696006BEFFB /* Node.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Node.java; sourceTree = "<group>"; };
+		8F34E56D2F87C7B8006BEFFB /* Successor.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Successor.java; sourceTree = "<group>"; };
+		8F34E56E2F87CF31006BEFFB /* Heuristic.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Heuristic.java; sourceTree = "<group>"; };
+		8F34E56F2F87D11E006BEFFB /* UCS.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = UCS.java; sourceTree = "<group>"; };
+		8F34E5702F87D2A8006BEFFB /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		8F34E5622F855F6A006BEFFB = {
 			isa = PBXGroup;
 			children = (
+				8F34E5692F855F7E006BEFFB /* State.java */,
+				8F34E56B2F87C652006BEFFB /* Move.java */,
+				8F34E56C2F87C696006BEFFB /* Node.java */,
+				8F34E56D2F87C7B8006BEFFB /* Successor.java */,
+				8F34E56E2F87CF31006BEFFB /* Heuristic.java */,
+				8F34E56F2F87D11E006BEFFB /* UCS.java */,
+				8F34E5702F87D2A8006BEFFB /* Untitled.swift */,
 			);
 			sourceTree = "<group>";
 		};
