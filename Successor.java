@@ -38,9 +38,9 @@ public class Successor {
             successors.add(makeNode(node, blank, row * 3 + 0, "WRAP_RIGHT", 1.0));
         
         //background kinhseis sthn idia sthlh
-        if (row = 0 && state.board[2 * 3 + col] != 0)
+        if (row == 0 && state.board[2 * 3 + col] != 0)
             successors.add(makeNode(node, blank, 2 * 3 + col, "WRAP_UP", 1.0));
-        if (row = 2 && state.board[0 * 3 + col] != 0)
+        if (row == 2 && state.board[0 * 3 + col] != 0)
             successors.add(makeNode(node, blank, col, "WRAP_DOWN", 1.0));
         
         //Teleport: keno sth katw aristera thesh=index 6 <--> keno sth panw deksia thesh=index 2
