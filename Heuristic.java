@@ -1,99 +1,78 @@
-// ypologizei thn euretikh sunarthsh h(n) gia mia katastash
-// h euretikh einai to athroisma twn mikroterwn diadromwn kathe plakidiou gia th thesh-stoxo tou
 public class Heuristic {
 
-        // epistrefei to index ths theshs-stoxou
-        private static int findGoal(int tile) {
-        for (int i = 0; i < 9; i++) {
-            if (State.goal[i] == tile) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    // upologizei to sunoliko kostos pou prokuptei apo thn euretikh sunarthsh
+    // sxediasame mia apodekth euretikh sunarthsh pou upologizei tis apostaseis twn plakidiwn apo ton stoxo
+    // kai lambanei up'opshn tis eidikes kinhseis teleport apo 2 se 6 kai antistrofa
     public static double compute(State state) {
         double h = 0;
 
         for (int pos = 0; pos < 9; pos++) {
             int tile = state.board[pos];
 
-            if (tile != 0) { //agnoei to keno
-                int goal = findGoal(tile);
-                h = h + shortestDistance(pos, goal);
+            if (tile != 0) {
+                int goalPos = findGoal(tile);
+                h = h + distance(pos, goalPos);
             }
         }
+
         return h;
     }
 
-    // briskei th mikroterh diadromh metaksu duo thesewn tou board
-    // xrhsimopoiei aploikh ulopoihsh algorithmou dijkstra panw ston grafo twn dunatwn kinhsewn
-    private static double shortestDistance(int start, int finish) {
-        double[] distance = new double[9];
-        boolean[] used = new boolean[9];
-
+    // epistrefei to index ths theshs tou plakidiou-orismatos ston pinaka telikhs katastashs (stoxou)
+    private static int findGoal(int tile) {
         for (int i = 0; i < 9; i++) {
-            distance[i] = -1;
-        }
-        distance[start] = 0;
-
-        for (int count = 0; count < 9; count++) {
-            int current = -1;
-
-            for (int i = 0; i < 9; i++) {
-                if (used[i] == false && distance[i] != -1) {
-                    if (current == -1 || distance[i] < distance[current]) {
-                        current = i;
-                    }
-                }
-            }
-            if (current == -1) {
-                break;
-            }
-            if (current == finish) {
-                return distance[current];
-            }
-            used[current] = true;
-
-            for (int pos = 0; pos < 9; pos++) {
-                double cost = moveCost(current, pos);
-
-                if (cost != -1) {
-                    double newDistance = distance[current] + cost;
-
-                    if (newDistance < distance[pos] || distance[pos] == -1) {
-                        distance[pos] = newDistance;
-                    }
-                }
+            if (State.goal[i] == tile) {
+                return i;
             }
         }
-        return distance[finish];
+
+        return -1;
     }
 
-    // epistrefei to kostos ths kinhshs apo thesh a se thesh b
-    // an h kinhsh den einai egkurh, epistrefei -1 (sfalma)
-    private static double moveCost(int a, int b) {
+    // epistrefei to elaxisto kostos kinhsewn pou apaiteitai gia na metakinithei ena plakidio
+    // apo th thesh a sth thesh b, lambanontas upopshn treis diadromes: apeutheias (me kinhseis up/down/left/right/wrap),
+    // me tis klassikes kinhseis + teleport apo 2 se 6 kai me klassikes kinhseis + teleport apo 6 se 2
+    private static double distance(int a, int b) {
+        double direct = manhattan(a, b);
+
+        double tpDown = manhattan(a, 2) + 0.5 + manhattan(6, b);
+        double tpUp = manhattan(a, 6) + 0.5 + manhattan(2, b);
+
+        if (tpDown < direct) {
+            direct = tpDown;
+        }
+
+        if (tpUp < direct) {
+            direct = tpUp;
+        }
+
+        return direct;
+    }
+
+    // tropopoihmenh apostash manhattan gia na lambanei upopshn tis wrap kinhseis
+    // allazei thn apostash gia tis wrap kinhseis apo 2 se 1 giati metakineitai sthn ousia duo theseis (an htan me kanonikes kinhseis)
+    // alla kostizei 1.0 san tis kanonikes kinhseis
+    private static double manhattan(int a, int b) {
         int curRow = a / 3;
         int curCol = a % 3;
-        int newRow = b / 3;
-        int newCol = b % 3;
 
-        if (curRow == newRow && Math.abs(curCol - newCol) == 1) {
-            return 1.0;
+        int goalRow = b / 3;
+        int goalCol = b % 3;
+
+        int rowDiff = curRow - goalRow;
+        int colDiff = curCol - goalCol;
+
+        if (rowDiff < 0) {
+            rowDiff = -rowDiff;
         }
-        if (curCol == newCol && Math.abs(curRow - newRow) == 1) {
-            return 1.0;
+        if (colDiff < 0) {
+            colDiff = -colDiff;
         }
-        if (curRow == newRow && Math.abs(curCol - newCol) == 2) {
-            return 1.0;
+        if (rowDiff == 2) {
+            rowDiff = 1;
         }
-        if (curCol == newCol && Math.abs(curRow - newRow) == 2) {
-            return 1.0;
+        if (colDiff == 2) {
+            colDiff = 1;
         }
-        if ((a == 2 && b == 6) || (a == 6 && b == 2)) {
-            return 0.5;
-        }
-        return -1;
+        return rowDiff + colDiff;
     }
 }
