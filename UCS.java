@@ -8,7 +8,7 @@ public class UCS {
 
     public static Node search(State start) {
         // priority queue taksinomhmenh kata auksousa timh g
-        // hash (closed) set gia na mh ksanapiskefthoume thn idia katastash
+        // hash set gia na mh ksanapiskefthoume thn idia katastash
         PriorityQueue<Node> nodes = new PriorityQueue<>((a, b) -> Double.compare(a.g, b.g));
         HashSet<State> used = new HashSet<>();
 
@@ -30,7 +30,7 @@ public class UCS {
 
             // an ftasoume ston stoxo (tk), epistrefoume ton kombo
             if (cur.state.goal()) {
-                System.out.println("epektaseis :" + expansions);
+                System.out.println("expansions :" + expansions);
                 return cur;
             }
 
@@ -38,7 +38,7 @@ public class UCS {
 
             List<Node> moves = Moves.getMoves(cur);
 
-            // paragwgh kai prosthiki twn paidiwn-kombwn sto metwpo me upologismo kostous kinhshs
+            // paragwgh kai prosthiki twn apodektwn kinhsewn sto metwpo
             for (Node move : moves) {
                 if (used.contains(move.state) == false ) {
                     nodes.add(move);
@@ -46,7 +46,7 @@ public class UCS {
             }
         }
 
-        System.out.println("epektaseis :" + expansions);
+        System.out.println("expansions :" + expansions);
         return null;
     }
 }

@@ -42,8 +42,8 @@ public class Main {
         
         List<String> path = new ArrayList<>();
         Node cur = goal;
-        while (cur.move != null) {
-            path.add(0 , cur.move);
+        while (cur.moves != null) {
+            path.add(0 , cur.moves);
             cur = cur.prevNode;
         }
         System.out.println("Path: " + path);

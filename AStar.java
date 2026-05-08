@@ -8,7 +8,7 @@ public class AStar {
     // xrhsimopoiei priority queue me proteraiothta th timh f = g + h
     public static Node search(State start) {
         // priority queue taksinomhmenh kata auksousa timh f = g + h
-        // hash (closed) set gia na mhn episkefthoume ksana thn idia katastash
+        // hash set gia na mhn episkefthoume ksana thn idia katastash
         PriorityQueue<Node> nodes = new PriorityQueue<>((a, b) -> Double.compare(a.f(), b.f()));
         HashSet<State> used = new HashSet<>();
 
@@ -30,14 +30,14 @@ public class AStar {
 
             // an ftasoume ston stoxo (tk), epistrefoume ton kombo
             if (current.state.goal()) {
-                System.out.println("epektaseis :" + expansions);
+                System.out.println("expansions :" + expansions);
                 return current;
             }
             expansions++;
 
             List<Node> moves = Moves.getMoves(current);
 
-            // paragwgh kai prosthiki twn paidiwn-kombwn sto metwpo me upologismo kostous kinhshs
+            // paragwgh kai prosthiki twn apodektwn kinhsewn sto metwpo me upologismo kostous kinhshs
             for (Node move : moves) {
                 if (used.contains(move.state) == false) {
                     move.h = Heuristic.compute(move.state);
@@ -46,7 +46,7 @@ public class AStar {
                 }
             }
         }
-        System.out.println("epektaseis :" + expansions);
+        System.out.println("expansions :" + expansions);
         return null;
     }
 }

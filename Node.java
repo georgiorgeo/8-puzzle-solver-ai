@@ -2,14 +2,14 @@
 public class Node {
     State state;    // h katastash tou kombou
     Node prevNode;  // o kombos proeleushs (goneas)
-    String move;    // h kinhsh apo thn opoia proekupse autos o kombos 
+    String moves;   // oi kinhseis apo tis opoies proekupse autos o kombos 
     double g;       // to pragmatiko kostos apo thn AK sth twrinh katastash-kombo
     double h;       // h ektimhsh ths euretikhs sunarthshs gia to upoloipomeno kostos (0 gia UCS, upologizetai apo thn euretikh gia A*)
     
-    public Node(State state, Node prevNode, String move, double g, double h) {
+    public Node(State state, Node prevNode, String moves, double g, double h) {
         this.state = state;
         this.prevNode = prevNode;
-        this.move = move;
+        this.moves = moves;
         this.g = g;
         this.h = h;
     }
